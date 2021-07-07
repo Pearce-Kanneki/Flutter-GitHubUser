@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http_example/ServerApi.dart';
 
@@ -28,7 +29,8 @@ class HomePage extends StatelessWidget {
         onPressed: () async {
           ServerApi serverApi = ServerApi();
           String result = await serverApi.getGithubUser();
-          print("Result: $result");
+          List jsonData = json.decode(result);
+          print("Result: ${jsonData[1]}");
         },
       ),
     );
