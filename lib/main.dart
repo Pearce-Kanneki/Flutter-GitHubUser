@@ -1,12 +1,18 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http_example/ServerApi.dart';
+import 'package:http_example/ListViewBuilderPage.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,25 +20,10 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("GitHub"),
         ),
-        body: HomePage(),
+        body: ListViewBuilderPage(),
       ),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: Text("Search"),
-        onPressed: () async {
-          ServerApi serverApi = ServerApi();
-          String result = await serverApi.getGithubUser();
-          List jsonData = json.decode(result);
-          print("Result: ${jsonData[1]}");
-        },
-      ),
-    );
-  }
-}
+
